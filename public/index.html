@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма отправки</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+</head>
+<body>
+    <form class="custom-form">
+        <input class="c-input" placeholder="Ваше имя и фамилия" name="name" minlength="3" type="text" required>
+        <input class="c-input" placeholder="Имя и фамилия второй половинки" name="partner_name" minlength="3" type="text" required>
+        <input class="c-input" placeholder="Предпочтения по алкоголю" name="alcohol_preferences" type="text" required>
+        <input class="c-input" placeholder="Пищевые аллергены" name="food_allergies" type="text" required>
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script>
+        $('.custom-form').on('submit', function(e) {
+            e.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '/send-message',
+                data: $(this).serialize(),
+                success: function(response) {
+                    alert(response);
+                },
+                error: function(error) {
+                    alert('Ошибка при отпрaвке сообщения');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
